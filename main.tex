@@ -1,0 +1,77 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+
+% Sane border sizes
+\usepackage{geometry}
+
+% For including images
+\usepackage{graphicx}
+
+% For multi-column stuff
+\usepackage{multicol}
+
+% Bibliography stuff
+\usepackage{natbib}
+\bibliographystyle{apalike}
+
+% PDF
+\usepackage{pdfpages}
+
+%appendices
+\usepackage[titletoc]{appendix}
+
+\usepackage{amsmath}
+
+\usepackage{enumerate}
+\usepackage{listings}
+
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\lstset{
+    %frame=tblr,
+    framesep=5pt,
+    basicstyle=\tiny,
+    showstringspaces=false,
+    keywordstyle=\itshape\color{blue},
+    %identifierstyle=\ttfamily,
+    stringstyle=\color{Maroon},
+    commentstyle=\color{black},
+    xleftmargin=5pt,
+    xrightmargin=5pt,
+    aboveskip=\bigskipamount,
+    belowskip=\bigskipamount,
+    %backgroundcolor=\color{LightGray!.50}
+}
+
+\numberwithin{figure}{section}%for figures
+\numberwithin{table}{section}%for tables
+
+% Don't let figures in one section go into the next section
+\usepackage[section,subsection,subsubsection]{placeins}
+
+% THE DOCUMENT BEGINS HERE
+\begin{document}
+
+\input{length-variables.tex}
+
+\input{title.tex}
+
+
+\tableofcontents
+\clearpage
+
+% Start counting pages at the research description
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+
+% INCLUDE CHAPTERS HERE
+\input{overview.tex}
+
+
+\begin{appendices}
+
+\end{appendices}
+
+\bibliography{references}
+\end{document}

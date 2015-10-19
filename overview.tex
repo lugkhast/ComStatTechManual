@@ -1,0 +1,16 @@
+
+\section{Overview}
+
+\textbf{ComStat} is a web application designed to be used as a tool for visualizing and simulating Community-Based Monitoring System (CBMS) data. Users can upload datasets, provided as CSV files compressed into ZIP or
+CAN\footnote{CBMS's CAN files are in fact ZIP files with a different extension.}
+files
+
+The system is built as a client-server system: the server is written in Python, built with Django and exposing a
+RESTful\footnote{\textbf{Representational State Transfer}, which is essentialy specific semantics for HTTP methods.}
+API; and the client is written in JavaScript, built with AngularJS, and consumes the API.
+
+% \emph{ComStat} is a web application that visualizes and simulates CBMS (Community Based Monitoring System) data that can be used ideally using Google Chrome as its browser. The system aims to give city officials as well as researchers a platform for visualizing a desired indicator. In effect, the system provides a representation per household and the color of the representation represents how good or bad is the households in a desired field. The system can accept two types of users. These are an admin, which has a complete enabled features, and a non-admin user, which is a restricted type of user.
+
+% As an admin user, he/she is entitled complete working features for the system. He/she can add new dataset, edit his/her own dataset and delete its own dataset. After creating his/her own dataset, the user upload his data in a .ZIP or .CAN file. After uploading, the user should process the data by filling up the necessary fields, or an auto-complete button. After processing, he/she can either upload a metadata, upload shape files, extract and download, visualize the data uploaded and simulate the data by using basic mathematical formula.
+
+% On the other hand, if a user is not an advanced user, he/she needs to ask for an access of the dataset he/she wants to use for visualization and simulation.

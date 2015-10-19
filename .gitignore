@@ -1,0 +1,30 @@
+
+# Ignore latex-related outputs
+*.pdf
+*.aux
+*.log
+*.bbl
+*.blg
+*.lof
+*.toc
+*.lol
+
+*.db
+
+*.dvi
+*.fdb_latexmk
+*.fls
+*.ps
+
+# JabRef backs up references.bib when you edit it. It's helpful, but is
+# redundant with Git.
+*.bak
+
+*.gz
+
+# Ignore vim stuff
+*.swp
+*.swo
+
+# Ignore the Sublime workspace file
+*.sublime-workspace
