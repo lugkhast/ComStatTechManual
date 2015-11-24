@@ -9,6 +9,43 @@ The system is built as a client-server system: the server is written in Python, 
 RESTful\footnote{\textbf{Representational State Transfer}, which is essentialy specific semantics for HTTP methods.}
 API; and the client is written in JavaScript, built with AngularJS, and consumes the API.
 
+
+\subsection{Essential terminology}
+
+\begin{itemize}
+    \item \textbf{Back end.} This refers to the Python components of the system, responsible for storing dataset data, computing simulations, and serving data to the front end through the API. The Django framework, and related libraries, are used for this part.
+    \item \textbf{Front end.} This refers to the JavaScript and HTML components of the system, which runs on the user's Web browser. This is responsible for displaying the user interface through which users interact with the system. The Angular framework, and related libraries, are used for this part.
+    \item \textbf{Application Programming Interface (API).} Refers to the URLs located under \texttt{/api/} through which the front end interacts with the back end.
+\end{itemize}
+
+
+\subsection{Prerequisite technical knowledge}
+
+The system is expected to handle the data of hundreds of thousands of households while staying within reasonable and practical limits for memory usage and processing time. As such, some features specific to the particular technology choices for the system are used.
+
+
+\subsubsection{Python}
+
+The system uses Python 3, and as such a casual familiarity with the specifics of this version of Python is expected. In particular, an understanding of Python 3's distiction between \texttt{string} and \texttt{byte} data types will be helpful when working with the Dataset Management module.
+
+\emph{Generators} are another important feature that gets used in the system's code. It gets used by the Simulation module code as an easy way to iterate over a large amount of household data without creating duplicate arrays for that data. A simple generator example is as follows:
+
+\begin{lstlisting}
+
+def do_something(things):
+    for thing in things:
+        # <some processing happens here>
+        yield thing
+
+\end{lstlisting}
+
+Simply put, the above Python function iterates through the given \texttt{things}, returning an iterable generator object with the \texttt{yield} keyword. Because the Simulation module's code is composed of multiple steps, ranging from retrieving households from MongoDB to attaching metadata to the household records, this pattern is seen in many functions in this module.
+
+
+\subsubsection{JavaScript} 
+
+Angular is used as a framework for building the front end. Its data binding functionality enables the easy synchronization of interface and underlying data model. Angular's \emph{directives} allow the packaging of UI components and logic into custom-made reusable tags. The related library \emph{UI Router} allows for rapid reload-free transitions between different pages of the application. As such, it is necessary to acquire at least a basic understanding of these features in order to work on the ComStat front end. Details on all of the aforementioned can be found in their respective pages on the Internet.
+
 % \emph{ComStat} is a web application that visualizes and simulates CBMS (Community Based Monitoring System) data that can be used ideally using Google Chrome as its browser. The system aims to give city officials as well as researchers a platform for visualizing a desired indicator. In effect, the system provides a representation per household and the color of the representation represents how good or bad is the households in a desired field. The system can accept two types of users. These are an admin, which has a complete enabled features, and a non-admin user, which is a restricted type of user.
 
 % As an admin user, he/she is entitled complete working features for the system. He/she can add new dataset, edit his/her own dataset and delete its own dataset. After creating his/her own dataset, the user upload his data in a .ZIP or .CAN file. After uploading, the user should process the data by filling up the necessary fields, or an auto-complete button. After processing, he/she can either upload a metadata, upload shape files, extract and download, visualize the data uploaded and simulate the data by using basic mathematical formula.
