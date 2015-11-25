@@ -1,4 +1,14 @@
 
 \section{Dataset Management Module}
 
+The Dataset Management Module is responsible for storing, keeping track, and retrieving data. To achieve this, both MongoDB and PostgreSQL are used.
 
+\begin{itemize}
+\item \textbf{PostgreSQL} is used for storing bookkeeping data. This includes the dataset name, references to metadata files, field types, and the like. This data naturally fits in the relational paradigm of data storage.
+\item \textbf{MongoDB} is used for storing data from uploaded CSV files. This data can be highly variable in terms of schema, making this a natural fit for a document-oriented data store.
+\end{itemize}
+
+
+\subsection{Bookkeeping}
+
+The Django Object-Relational Mapper (ORM) is used for modelling bookkeeping data and interacting with the PostgreSQL for persistent storage.
