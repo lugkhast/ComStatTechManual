@@ -12,9 +12,11 @@ The Map Visualization part of the Visualization module is a part of the system t
 	\item \textbf{Chroma.js}
 	This library is needed to generate colors for non-numerical items. Colors can range from orange, yellow, blue, indigo and violet. Red and green colors are not allowed since it might confuse the user non-numerical to poverty indicator formula.
 \end{itemize}
-\subsection{Overview Section of Maps}
+\subsection{Household Level Visualization}
+Household level visualization is one of the feature of this module. Using the Google Maps API and D3.js, the user can visualize one to two fields selected by the user. By determining the color appropriate for a certain household because of his/her status, marker is rendered with a custom image as its icon. Rendering a custom icon is important because it lessen the stress of the system if thousand or millions of the data are needed to be visualized. Numerical and non-numerical visualization are not handled by Google Maps API because of the randomize color used by non-numerical field. D3.js handles that situation. D3.js handles the visualization of the numerical and non-numerical 2 variable visualization.
+\subsection{Barangay Level Visualization}
+Barangay level visualization uses Google Maps API also as its main library. The user can visualize all barangays or selected barangays. By converting the shape files into GEOJSON format and uses the Google Maps API for map setting and style or coloring of the polygons. 
+\subsection{Simulate Data Through Sliders}
 
-This function gets all the necessary information from the storage to the view. Creating the data handler function is necessary since data retrieval in a web application experiences "delay". In effect, no data can't be shown on screen. The developers of the system uses "promise then" function to cope with this situation. Every processes will wait the data to load then proceed to do processes when the data arrived. In this section, the necessary informations are rendered on screen after filtering the data.
-\subsection{Barangay and Households Section of Maps}
-\subsection{Household Summary Statistics Section of Maps}
+
 \clearpage
