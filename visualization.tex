@@ -1,6 +1,20 @@
-\section{Visualization Module}
-\subsection{Overview}
-\subsubsection{Data Handler Function}
+\section{Map Visualization}
+The Map Visualization part of the Visualization module is a part of the system that allows a user to visualize data through geographic maps upon choosing the field in the data. The module uses different libraries: 
+\begin{itemize}
+	\item \textbf{Google Maps API}
+	This library is being used for visualizing data through geographical maps. Images that are rendered on visualization are supported by Google Maps API library. 
+	\item \textbf{D3.js}
+	This library implements the numerical and non-numerical 2-variable visualization. After the user selected two fields that are numerical and non-numerical(metadata should be uploaded), the library will render donut marker that represents per household. Since non-numerical fields generate randomize color and Google Maps API doesn't support rendering donuts. D3.js is used. 
+	
+	\item \textbf{Angular Range-Slider}
+	This library implements the two-handler slider that simulates future status per household. Instead of having one-handler slider that has fix minimum and adjustable maximum, two-handler slider is implemented. It allows the user flexibility on having an adjustable minimum and maximum and also visualizes the household inside the adjusted minimum and maximum. 
+	
+	\item \textbf{Chroma.js}
+	This library is needed to generate colors for non-numerical items. Colors can range from orange, yellow, blue, indigo and violet. Red and green colors are not allowed since it might confuse the user non-numerical to poverty indicator formula.
+\end{itemize}
+\subsection{Overview Section of Maps}
+
 This function gets all the necessary information from the storage to the view. Creating the data handler function is necessary since data retrieval in a web application experiences "delay". In effect, no data can't be shown on screen. The developers of the system uses "promise then" function to cope with this situation. Every processes will wait the data to load then proceed to do processes when the data arrived. In this section, the necessary informations are rendered on screen after filtering the data.
-\subsection{Barangay and Households}
-\subsection{Household Summary Statistics}
+\subsection{Barangay and Households Section of Maps}
+\subsection{Household Summary Statistics Section of Maps}
+\clearpage
