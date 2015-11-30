@@ -11,6 +11,69 @@ The Dataset Management Module is responsible for storing, keeping track, and ret
 
 \subsection{Bookkeeping}
 
-The Django Object-Relational Mapper (ORM) is used for modelling bookkeeping data and interacting with the PostgreSQL for persistent storage.
+The Django Object-Relational Mapper (ORM) is used for modelling bookkeeping data and interacting with the PostgreSQL for persistent storage. Simply put, it abstracts away the details of SQL in general and PostgreSQL in particular, thus letting the code focus only on what data to store and how exactly it should be stored. Specific details on the inner workings of the Django ORM can be found on their website.
+
+The model declarations for the dataset module\footnote{These can be found in \texttt{datasets/models.py}} are not particularly novel -- these are simply straightforward usages of readily-available data types from the Django ORM for all kinds of bookkeeping data necessary for keeping datasets in order. As such, for more details, please refer to the code itself.
+
+
+\subsection{Storing dataset data}
+
+The system is designed to accept datasets for which the number and type of data files and fields are not known ahead of time. The only assumption made of incoming data is that there exists a unique identifier (internally referred to as a \emph{group key}) that marks a set of data file rows as related. In practice, and in the user interface, this is the unique household ID. Given such demands, it is not practical to store this kind of data is a pre-defined relational database. This necessitates the use of a document-oriented database -- in ComStat's case, MongoDB.
+
+In the ComStat user interface, a dataset must go through a preparation step before it can be used in visualization or simulation tasks. Internally, this is referred to as \emph{preprocessing}, and it includes the steps necessary to go from a set of CSV files to household records stored in, and readily retrievable from, MongoDB.
+
+It may be helpful to browse the code while reading this section, as trivial or performance-related specifics of the implementation are generally not discussed. Code relating to interactions with MongoDB is located in \texttt{datasets/records.py}.
+
+
+\subsection{Preprocessing}
+
+\subsubsection{Extraction of location information}
+
+Users (or the system, if automatically discovered) can optionally specify fields in a dataset as latitude/longitude data. If such parameters exist, the specified fields are copied directly from the main CSV, and saved into the \texttt{comstat.location\_records} collection, along with the corresponding unique household ID. This allows easy retrieval of location data when necessary.
+
+\subsubsection{Saving data files into MongoDB}
+
+Preprocessing proper begins by taking each row of each CSV of a dataset, and saving it in the \texttt{comstat.dataset\_records} collection in MongoDB. This acts as a staging area on which the entire dataset and be queried and sorted as needed whenever necessary for further preprocessing stages. Each data file is processed in parallel using Celery tasks, thus taking advantage of multiple CPU cores.
+
+\subsubsection{Combining related CSV rows into household records}
+
+The usage of a document-oriented database like MongoDB means the loss of standard relational database functionality, such as joins. Thus, in order to get the data of each household grouped together, it is necessary to go through all dataset records and group them together by unique household ID at preprocess time. Internally, this is referred to as \emph{collecting records}. A household record looks like the following:
+
+\begin{lstlisting}
+{
+  "comstat_group_key": 12345,
+  "dataset_id": 678,
+  "tables": {
+    "main.csv": [
+      { ... }
+    ],
+    "members.csv": [
+      { ... },
+      { ... }
+    ],
+    ...
+  }
+}
+\end{lstlisting}
+
+It is worth noting that the period character ``." has special meaning in MongoDB's query syntax and is not allowed in field names. To get around this problem, all household record field names originating from user-provided data is stored in MongoDB in Base64 form. For example, the string \texttt{main.csv} above would instead be the string \texttt{bWFpbi5jc3Y=} when stored in MongoDB.
+
+
+\subsection{Retrieval}
+
+\subsubsection{Retrieving household records from MongoDB}
+
+Due to household record fields being stored as Base64, converting from Base64 to human-readable form is always (and, for future development, should always) be the first thing done on the records. Furthermore, because location data only depends on the unique household ID (an integer), it is automatically attached to every household record immediately after it is received from MongoDB, if location data is configured for the dataset.
+
+Take note that this part of the system's code relies heavily on the \emph{generator} concept available in the Python programming language.
+
+\subsubsection{Attaching optional extra data}
+
+Datasets may contain location data, which users can configure before preprocessing. Users may also upload metadata giving dataset variables a human-friendly name. Once dataset field names have been converted into normal strings from Base64, these pieces of data are attached. Metadata itself is implemented as the \texttt{csmetadata} Django app, and inserts neatly in the household record retrieval pipeline via generators.
+
+
+\subsection{Unused code}
+
+The system still contains some unused code from experiments and approaches that were explored during development. Most notable is the \emph{datapipes} module, an implementation of simulation that ended up being abandoned. It contains a records pipeline that was implemented without the knowledge of Python generators, as well as a set of components implementing logic that is now implemented using user-provided arithmetic text expressions. This code is left in the system as a possible launching point for alternative concepts for approaching simulation.
 
 \clearpage
