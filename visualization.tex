@@ -14,9 +14,11 @@ The Map Visualization part of the Visualization module is a part of the system t
 \end{itemize}
 \subsection{Household Level Visualization}
 Household level visualization is one of the feature of this module. Using the Google Maps API and D3.js, the user can visualize one to two fields selected by the user. By determining the color appropriate for a certain household because of his/her status, marker is rendered with a custom image as its icon. Rendering a custom icon is important because it lessen the stress of the system if thousand or millions of the data are needed to be visualized. Numerical and non-numerical visualization are not handled by Google Maps API because of the randomize color used by non-numerical field. D3.js handles that situation. D3.js handles the visualization of the numerical and non-numerical 2 variable visualization.
+
 \subsection{Barangay Level Visualization}
 Barangay level visualization uses Google Maps API also as its main library. The user can visualize all barangays or selected barangays. By converting the shape files into GEOJSON format and uses the Google Maps API for map setting and style or coloring of the polygons. 
-\subsection{Simulate Data Through Sliders}
 
+\subsection{Simulate Data Through Sliders}
+Simulating the household data through sliders is handled by "Angular Range-Slider" library. It gets the adjusted minimum and the adjusted maximum through sliding the handler from left to right or vice-versa. In effect, this will show how the household is performing if the threshold is changed from time to time.
 
 \clearpage
