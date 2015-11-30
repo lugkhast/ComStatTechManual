@@ -16,6 +16,7 @@ API; and the client is written in JavaScript, built with AngularJS, and consumes
     \item \textbf{Back end.} This refers to the Python components of the system, responsible for storing dataset data, computing simulations, and serving data to the front end through the API. The Django framework, and related libraries, are used for this part.
     \item \textbf{Front end.} This refers to the JavaScript and HTML components of the system, which runs on the user's Web browser. This is responsible for displaying the user interface through which users interact with the system. The Angular framework, and related libraries, are used for this part.
     \item \textbf{Application Programming Interface (API).} Refers to the URLs located under \texttt{/api/} through which the front end interacts with the back end.
+    \item \textbf{Main CSV.} For the purpose of this system's technical discussion, this refers to the CSV file containing one entry for every household containing information such as interview date and household GPS coordinates. CBMS data files usually have \emph{HH} or \emph{main} in the file names of their main CSV files.
 \end{itemize}
 
 
@@ -55,3 +56,5 @@ Like the back end, the front end also comes with unit tests. However, these were
 % As an admin user, he/she is entitled complete working features for the system. He/she can add new dataset, edit his/her own dataset and delete its own dataset. After creating his/her own dataset, the user upload his data in a .ZIP or .CAN file. After uploading, the user should process the data by filling up the necessary fields, or an auto-complete button. After processing, he/she can either upload a metadata, upload shape files, extract and download, visualize the data uploaded and simulate the data by using basic mathematical formula.
 
 % On the other hand, if a user is not an advanced user, he/she needs to ask for an access of the dataset he/she wants to use for visualization and simulation.
+
+\clearpage
