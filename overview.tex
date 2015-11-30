@@ -17,6 +17,7 @@ API; and the client is written in JavaScript, built with AngularJS, and consumes
     \item \textbf{Front end.} This refers to the JavaScript and HTML components of the system, which runs on the user's Web browser. This is responsible for displaying the user interface through which users interact with the system. The Angular framework, and related libraries, are used for this part.
     \item \textbf{Application Programming Interface (API).} Refers to the URLs located under \texttt{/api/} through which the front end interacts with the back end.
     \item \textbf{Main CSV.} For the purpose of this system's technical discussion, this refers to the CSV file containing one entry for every household containing information such as interview date and household GPS coordinates. CBMS data files usually have \emph{HH} or \emph{main} in the file names of their main CSV files.
+    \item \textbf{Group key.} The term used internally for referring to a household's unique ID.
 \end{itemize}
 
 
@@ -42,7 +43,9 @@ def do_something(things):
 
 Simply put, the above Python function iterates through the given \texttt{things}, returning an iterable generator object with the \texttt{yield} keyword. Because the Simulation module's code is composed of multiple steps, ranging from retrieving households from MongoDB to attaching metadata to the household records, this pattern is seen in many functions in this module.
 
-Lastly, the back end relies heavily on unit tests to verify that key pieces of code return the correct results. These tests are located under the \texttt{tests} folder inside each Django app's folder\footnote{For example, \texttt{datasets/tests/} or \texttt{api/tests/}}. It is \textbf{very strongly recommended} that the code is maintained such that the tests always pass, to ensure that no existing system functionality breaks during future development. It is also strongly recommended that further development also rely on unit tests to allow for easy and confident refactoring, as well as to provide assurance that further development produces code that does exactly what is intended.
+Furthermore, the back end relies heavily on unit tests to verify that key pieces of code return the correct results. These tests are located under the \texttt{tests} folder inside each Django app's folder\footnote{For example, \texttt{datasets/tests/} or \texttt{api/tests/}}. It is \textbf{very strongly recommended} that the code is maintained such that the tests always pass, to ensure that no existing system functionality breaks during future development. It is also strongly recommended that further development also rely on unit tests to allow for easy and confident refactoring, as well as to provide assurance that further development produces code that does exactly what is intended.
+
+Lastly, working unit tests are the most trustworthy documentation. If unsure about the specifics of code that is covered by tests, examine how the tests call the code as a reference for how it should be used, what the parameters mean, and any error conditions that may be encountered.
 
 
 \subsubsection{JavaScript} 
