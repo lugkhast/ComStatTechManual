@@ -29,11 +29,11 @@ It may be helpful to browse the code while reading this section, as trivial or p
 
 \subsubsection{Extraction of location information}
 
-Users (or the system, if automatically discovered) can optionally specify fields in a dataset as latitude/longitude data. If such parameters exist, the specified fields are copied directly from the main CSV, and saved into the \texttt{comstat.location\_records} collection, along with the corresponding unique household ID. This allows easy retrieval of location data when necessary.
+Users (or the system, if automatically discovered) can optionally specify fields in a dataset as latitude/longitude data. If such parameters exist, the specified fields are copied directly from the main CSV, and saved into the \texttt{comstat.location\_records} collection in MongoDB, along with the corresponding unique household ID. This allows easy retrieval of location data when necessary.
 
 \subsubsection{Saving data files into MongoDB}
 
-Preprocessing proper begins by taking each row of each CSV of a dataset, and saving it in the \texttt{comstat.dataset\_records} collection in MongoDB. This acts as a staging area on which the entire dataset and be queried and sorted as needed whenever necessary for further preprocessing stages. Each data file is processed in parallel using Celery tasks, thus taking advantage of multiple CPU cores.
+Preprocessing proper begins by taking each row of each CSV of a dataset, and saving it in the \texttt{comstat.dataset\_records} collection. This acts as a staging area on which the entire dataset and be queried and sorted as needed whenever necessary for further preprocessing stages. Each data file is processed in parallel using Celery tasks, thus taking advantage of multiple CPU cores.
 
 \subsubsection{Combining related CSV rows into household records}
 
