@@ -15,7 +15,6 @@ The Django Object-Relational Mapper (ORM) is used for modelling bookkeeping data
 
 The model declarations for the dataset module\footnote{These can be found in \texttt{datasets/models.py}} are not particularly novel -- these are simply straightforward usages of readily-available data types from the Django ORM for all kinds of bookkeeping data necessary for keeping datasets in order. As such, for more details, please refer to the code itself.
 
-
 \subsection{Storing dataset data}
 
 The system is designed to accept datasets for which the number and type of data files and fields are not known ahead of time. The only assumption made of incoming data is that there exists a unique identifier (internally referred to as a \emph{group key}) that marks a set of data file rows as related. In practice, and in the user interface, this is the unique household ID. Given such demands, it is not practical to store this kind of data is a pre-defined relational database. This necessitates the use of a document-oriented database -- in ComStat's case, MongoDB.
